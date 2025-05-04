@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Draft Complete</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h1>🎯 Draft complete! Your team:</h1>
+    <ul>
+      {% for pick in your_team %}
+        <li>{{ pick }}</li>
+      {% endfor %}
+    </ul>
+    <a href="{{ url_for('index') }}">Start New Draft</a>
+  </div>
+</body>
+</html>

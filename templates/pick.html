@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Draft – Round {{ round_num }}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="container">
+    <h2>=== Round {{ round_num }} ===</h2>
+    <h3>
+      {% if is_user_turn %}
+        🔷 Your Turn (Team {{ current_team }})
+      {% else %}
+        Team {{ current_team }}'s Pick
+      {% endif %}
+    </h3>
+
+    <form method="POST" id="pick-form">
+      {% if is_user_turn %}
+        <p>Recommended Picks:</p>
+        <div class="options">
+          {% for p in top3 %}
+            <div class="option">
+              <input type="radio"
+                     id="r{{ loop.index }}"
+                     name="radio_choice"
+                     value="{{ p.name }}">
+              <label for="r{{ loop.index }}">
+                {{ loop.index }}. {{ p.name }} ({{ p.position }}) – {{ p.ppr }} PPR
+              </label>
+            </div>
+          {% endfor %}
+        </div>
+
+        <p>Or pick your own:</p>
+        <input type="text"
+               name="manual_choice"
+               id="manual_choice"
+               placeholder="Type full player name here">
+      {% else %}
+        <p>Enter the player that Team {{ current_team }} picked:</p>
+        <input type="text"
+               name="manual_choice"
+               id="manual_choice"
+               placeholder="Type full player name here"
+               required>
+      {% endif %}
+
+      <button type="submit">
+        {% if is_user_turn %}Confirm Your Pick{% else %}Submit{% endif %}
+      </button>
+    </form>
+  </div>
+
+  <script>
+    // Clear manual field when you pick a radio
+    document.addEventListener('DOMContentLoaded', () => {
+      const radios = document.querySelectorAll('input[name="radio_choice"]');
+      const manual = document.getElementById('manual_choice');
+      radios.forEach(radio => {
+        radio.addEventListener('change', () => {
+          manual.value = '';
+        });
+      });
+    });
+  </script>
+</body>
+</html>
