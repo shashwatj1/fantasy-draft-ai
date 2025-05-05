@@ -1,21 +1,17 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Fantasy Draft AI</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
-  <div class="container">
-    <h1>Fantasy Draft AI</h1>
-    <form method="POST">
-      <label>Enter the number of teams in the draft:</label><br>
-      <input type="number" name="num_teams" min="2" max="20" step="2" required><br><br>
+{% extends "base.html" %}
 
-      <label>Enter what pick in the draft you are:</label><br>
-      <input type="number" name="draft_pick" min="1" required><br><br>
+{% block title %}Home – Fantasy Draft AI{% endblock %}
+
+{% block content %}
+  <div class="container">
+    <form method="POST">
+      <label>Enter the number of teams in the draft:</label>
+      <input type="number" name="num_teams" min="2" max="20" step="2" required>
+
+      <label>Enter what pick in the draft you are:</label>
+      <input type="number" name="draft_pick" min="1" required>
 
       <button type="submit">Start Draft</button>
     </form>
   </div>
-</body>
-</html>
+{% endblock %}

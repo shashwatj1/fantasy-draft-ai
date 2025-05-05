@@ -1,18 +1,15 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <title>Draft Complete</title>
-  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
-</head>
-<body>
+{% extends "base.html" %}
+
+{% block title %}Results – Fantasy Draft AI{% endblock %}
+
+{% block content %}
   <div class="container">
-    <h1>🎯 Draft complete! Your team:</h1>
+    <h2>🎯 Draft Complete! Your team:</h2>
     <ul>
       {% for pick in your_team %}
         <li>{{ pick }}</li>
       {% endfor %}
     </ul>
-    <a href="{{ url_for('index') }}">Start New Draft</a>
+    <a href="{{ url_for('index') }}" class="btn">Start New Draft</a>
   </div>
-</body>
-</html>
+{% endblock %}
